@@ -186,7 +186,6 @@ export default function App() {
   }
 }
 
-//  STYLES 
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -233,4 +232,3 @@ const styles = StyleSheet.create({
   sectionTitle: { fontSize: 18, fontWeight: 'bold', color: '#0078AA', marginBottom: 10 },
   listItem: { fontSize: 16, color: '#333', marginVertical: 3 },
 });
-
