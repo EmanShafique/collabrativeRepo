@@ -2,73 +2,90 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
 
 export default function App() {
-  const [page, setPage] = useState('welcome');
+  const [page, setPage] = useState('welcome'); // controls which page to show
 
-  // Signup info
+  // Signup info (controlled inputs for signup form)
   const [signupName, setSignupName] = useState('');
   const [signupEmail, setSignupEmail] = useState('');
   const [signupPassword, setSignupPassword] = useState('');
 
-  // Login info
+  // Login info (controlled inputs for login form)
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
 
-  // User data
+  // Logged‑in user details
   const [currentUser, setCurrentUser] = useState(null);
 
-  // Tasks and reminders
+  // Static exercises and reminders lists
   const exercises = ['20 Push Ups', '15 Squats', '10 Minute Walk', 'Plank for 30 sec'];
   const reminders = ['💧 Drink 8 glasses of water', '🥗 Eat balanced meals', '🕒 Sleep at least 7 hours', '🚶 Walk 5,000 steps'];
 
-  // SIGNUP 
+  // SIGNUP HANDLER
   const handleSignup = () => {
+    // Check if fields are filled
     if (signupName && signupEmail && signupPassword) {
       alert('Account Created Successfully!');
+
+      // Save user info in state
       setCurrentUser({ name: signupName, email: signupEmail, password: signupPassword });
+
+      // Clear the fields
       setSignupName('');
       setSignupEmail('');
       setSignupPassword('');
+
+      // Redirect to login
       setPage('login');
     } else {
       alert('Please fill all fields!');
     }
   };
 
-  // LOGIN 
+  // LOGIN HANDLER
   const handleLogin = () => {
+    // If user never signed up
     if (!currentUser) {
       alert('Please sign up first!');
       setPage('signup');
-    } else if (loginEmail === currentUser.email && loginPassword === currentUser.password) {
+    }
+    // If credentials match
+    else if (loginEmail === currentUser.email && loginPassword === currentUser.password) {
       alert('Welcome back, ' + currentUser.name + '!');
       setPage('home');
-    } else {
+    }
+    // Incorrect credentials
+    else {
       alert('Incorrect email or password!');
     }
   };
 
-  // LOGOUT
+  // LOGOUT HANDLER
   const handleLogout = () => {
-    setLoginEmail('');
-    setLoginPassword('');
-    setPage('welcome');
+    setLoginEmail(''); // clear login email
+    setLoginPassword(''); // clear login password
+    setPage('welcome'); // go back to welcome screen
   };
 
-  //  WELCOME PAGE 
+  // ================= WELCOME SCREEN =================
   if (page === 'welcome') {
     return (
       <View style={styles.container}>
         <Text style={styles.appTitle}>🏋️‍♀️ FitZone</Text>
+
+        {/* App icon */}
         <Image
           source={{ uri: 'https://cdn-icons-png.flaticon.com/512/2964/2964514.png' }}
           style={{ width: 150, height: 150, marginBottom: 30 }}
         />
+
         <Text style={styles.subtitle}>Your Personalized Fitness Partner</Text>
 
+        {/* Navigate to Login */}
         <TouchableOpacity style={styles.btn} onPress={() => setPage('login')}>
           <Text style={styles.btnText}>Login</Text>
         </TouchableOpacity>
 
+        {/* Navigate to Signup */}
         <TouchableOpacity
           style={[styles.btn, { backgroundColor: '#4E9F3D' }]}
           onPress={() => setPage('signup')}
@@ -79,24 +96,29 @@ export default function App() {
     );
   }
 
-  //  SIGNUP PAGE 
+  // ================= SIGNUP SCREEN =================
   if (page === 'signup') {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Create Your Account</Text>
 
+        {/* Full Name */}
         <TextInput
           placeholder="Full Name"
           style={styles.input}
           value={signupName}
           onChangeText={setSignupName}
         />
+
+        {/* Email */}
         <TextInput
           placeholder="Email"
           style={styles.input}
           value={signupEmail}
           onChangeText={setSignupEmail}
         />
+
+        {/* Password */}
         <TextInput
           placeholder="Password"
           style={styles.input}
@@ -105,6 +127,7 @@ export default function App() {
           onChangeText={setSignupPassword}
         />
 
+        {/* Signup Button */}
         <TouchableOpacity
           style={[styles.btn, { backgroundColor: '#4E9F3D' }]}
           onPress={handleSignup}
@@ -112,6 +135,7 @@ export default function App() {
           <Text style={styles.btnText}>Sign Up</Text>
         </TouchableOpacity>
 
+        {/* Go to Login */}
         <TouchableOpacity onPress={() => setPage('login')}>
           <Text style={styles.link}>Already have an account? Login</Text>
         </TouchableOpacity>
@@ -119,18 +143,21 @@ export default function App() {
     );
   }
 
-  //  LOGIN PAGE 
+  // ================= LOGIN SCREEN =================
   if (page === 'login') {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Login to FitZone</Text>
 
+        {/* Email */}
         <TextInput
           placeholder="Email"
           style={styles.input}
           value={loginEmail}
           onChangeText={setLoginEmail}
         />
+
+        {/* Password */}
         <TextInput
           placeholder="Password"
           style={styles.input}
@@ -139,10 +166,12 @@ export default function App() {
           onChangeText={setLoginPassword}
         />
 
+        {/* Login Button */}
         <TouchableOpacity style={styles.btn} onPress={handleLogin}>
           <Text style={styles.btnText}>Login</Text>
         </TouchableOpacity>
 
+        {/* Go to Signup */}
         <TouchableOpacity onPress={() => setPage('signup')}>
           <Text style={styles.link}>Don’t have an account? Sign Up</Text>
         </TouchableOpacity>
@@ -150,17 +179,21 @@ export default function App() {
     );
   }
 
-  //  HOME PAGE 
+  // ================= HOME SCREEN =================
   if (page === 'home') {
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.title}>Welcome, {currentUser?.name} 👋</Text>
+
+        {/* Profile picture */}
         <Image
           source={{ uri: 'https://cdn-icons-png.flaticon.com/512/706/706830.png' }}
           style={styles.profilePic}
         />
+
         <Text style={styles.subtitle}>Email: {currentUser?.email}</Text>
 
+        {/* Exercises List */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>🏋️ Pending Exercises</Text>
           {exercises.map((item, index) => (
@@ -168,6 +201,7 @@ export default function App() {
           ))}
         </View>
 
+        {/* Reminders List */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>⏰ Daily Reminders</Text>
           {reminders.map((item, index) => (
@@ -175,6 +209,7 @@ export default function App() {
           ))}
         </View>
 
+        {/* Logout Button */}
         <TouchableOpacity
           style={[styles.btn, { backgroundColor: '#D61355', marginTop: 30 }]}
           onPress={handleLogout}
@@ -186,6 +221,7 @@ export default function App() {
   }
 }
 
+// ================= STYLES =================
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
