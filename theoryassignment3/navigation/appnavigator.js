@@ -20,23 +20,11 @@ export default function AppNavigator() {
     <NavigationContainer>
       {/* Stack navigator for switching between screens */}
       <Stack.Navigator initialRouteName="Welcome">
-
-        {/* Welcome screen (header hidden) */}
         <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
-
-        {/* Signup screen */}
         <Stack.Screen name="Signup" component={Signup} />
-
-        {/* Login screen */}
         <Stack.Screen name="Login" component={Login} />
-
-        {/* Home screen (header hidden) */}
         <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-
-        {/* User profile screen */}
         <Stack.Screen name="Profile" component={Profile} />
-
-        {/* Tasks or exercises screen */}
         <Stack.Screen name="Tasks" component={Tasks} />
 
       </Stack.Navigator>
