@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
 
   // Subtitle text styling
   subtitle: { fontSize: 18, color: '#333', marginBottom: 25 },
-
   // Button styling
   btn: {
     width: '80%',
@@ -53,7 +52,6 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     alignItems: 'center'
   },
-
   // Button text styling
   btnText: { color: 'white', fontSize: 18, fontWeight: 'bold' }
 });
