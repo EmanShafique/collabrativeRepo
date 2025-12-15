@@ -20,6 +20,20 @@ export default function HomeScreen({ navigation }) {
       >
         <Text style={styles.btnText}>View Profile</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Tasks')}>
+  <Text style={styles.btnText}>My Tasks</Text>
+</TouchableOpacity>
+
+<TouchableOpacity style={[styles.btn, { backgroundColor: '#4E9F3D' }]} onPress={() => navigation.navigate('Profile')}>
+  <Text style={styles.btnText}>View Profile</Text>
+</TouchableOpacity>
+<TouchableOpacity
+  style={[styles.btn, { backgroundColor: '#FF8C00' }]}
+  onPress={() => navigation.navigate('ExercisesAPI')}
+>
+  <Text style={styles.btnText}>Explore Exercises 🔥</Text>
+</TouchableOpacity>
+
     </View>
   );
 }
